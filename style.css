@@ -93,6 +93,13 @@ main h2 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
   border: 1px solid var(--mist); border-radius: 14px; overflow: hidden;
   background: var(--white);
 }
+/* البطاقة كرابط */
+a.car {
+  display: block; color: inherit;
+  transition: border-color .15s;
+}
+a.car:hover { border-color: var(--signal); }
+
 .car-photo { aspect-ratio: 4 / 3; background: var(--mist); }
 .car-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .car-body { padding: 16px; }
