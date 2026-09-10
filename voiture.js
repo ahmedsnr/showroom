@@ -1,8 +1,7 @@
 import { db } from "./firebase-config.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
-// ⚠️ ضع هنا رقم هاتف الشوروم الحقيقي
-const TELEPHONE = "+213000000000";
+const TELEPHONE = "+213551234567";
 
 const conteneur = document.getElementById("detail");
 
@@ -17,7 +16,6 @@ function nombre(n) {
   return Number(n || 0).toLocaleString("fr-DZ");
 }
 
-// بناء سطر في الفيشة التقنية — يُخفى إن كانت القيمة فارغة
 function ligne(titre, valeur) {
   if (!valeur && valeur !== 0) return "";
   return `<div class="fiche-row"><span>${titre}</span><strong>${valeur}</strong></div>`;
@@ -50,7 +48,7 @@ async function charger() {
 function afficher(c) {
   const titre = `${c.marque || ""} ${c.modele || ""}`.trim();
   const statut = c.statut || "disponible";
-  document.title = `${titre} — شوروم السيارات`;
+  document.title = `${titre} — Auto Prestige`;
 
   conteneur.innerHTML = `
     <div class="detail-top">
