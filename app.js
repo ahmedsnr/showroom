@@ -6,19 +6,24 @@ import {
 const grid = document.getElementById("cars-grid");
 const etat = document.getElementById("etat");
 
-const typeLabels = {
-  neuf: "جديدة",
-  occasion: "مستعملة",
-  import: "وارد الخارج"
-};
+const typeLabels = { neuf: "جديدة", occasion: "مستعملة", import: "وارد الخارج" };
+const carburantLabels = { essence: "بنزين", diesel: "مازوت", gpl: "غاز GPL", hybride: "هجينة" };
+const boiteLabels = { manuelle: "عادي", automatique: "أوتوماتيك" };
 
 let toutesLesVoitures = [];
 
-// جلب السيارات من قاعدة البيانات
+function nombre(n) {
+  return Number(n || 0).toLocaleString("fr-DZ");
+}
+
 async function charger() {
   try {
     const snap = await getDocs(query(collection(db, "cars"), orderBy("dateAjout", "desc")));
     toutesLesVoitures = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+    const compteur = document.getElementById("stat-count");
+    if (compteur) compteur.textContent = toutesLesVoitures.length;
+
     afficher(toutesLesVoitures);
   } catch (e) {
     console.error(e);
@@ -27,7 +32,6 @@ async function charger() {
   }
 }
 
-// عرض السيارات على الشاشة
 function afficher(liste) {
   grid.innerHTML = "";
 
@@ -37,36 +41,41 @@ function afficher(liste) {
     return;
   }
 
-  etat.textContent = `${liste.length} سيارة متوفرة`;
+  etat.textContent = `${liste.length} سيارة معروضة`;
   etat.className = "etat";
 
   liste.forEach(c => {
     const vendu = c.statut === "vendu";
-    const article = document.createElement("a");
-    article.className = "car";
-    article.href = `voiture.html?id=${c.id}`;
-    article.innerHTML = `
+    const neuf = c.type === "neuf";
+
+    // الأوصاف السريعة تحت البطاقة
+    const specs = [
+      c.annee,
+      c.kilometrage ? nombre(c.kilometrage) + " كلم" : null,
+      carburantLabels[c.carburant],
+      boiteLabels[c.boite]
+    ].filter(Boolean).map(s => `<span>${s}</span>`).join("");
+
+    const carte = document.createElement("a");
+    carte.className = "car";
+    carte.href = `voiture.html?id=${c.id}`;
+    carte.innerHTML = `
       <div class="car-photo">
         ${c.imagePrincipale ? `<img src="${c.imagePrincipale}" alt="${c.marque} ${c.modele}" loading="lazy">` : ""}
+        <span class="tag ${vendu ? "vendu" : neuf ? "neuf" : ""}">
+          ${vendu ? "مُباعة" : (typeLabels[c.type] || "")}
+        </span>
       </div>
       <div class="car-body">
-        <div class="car-top">
-          <h3>${c.marque || ""} ${c.modele || ""}</h3>
-          <span class="tag ${vendu ? "vendu" : ""}">
-            ${vendu ? "مُباعة" : (typeLabels[c.type] || "")}
-          </span>
-        </div>
-        <p class="car-meta">
-          ${c.annee || ""}${c.kilometrage ? " — " + Number(c.kilometrage).toLocaleString("fr-DZ") + " كلم" : ""}
-        </p>
-        <p class="car-price">${Number(c.prix || 0).toLocaleString("fr-DZ")} دج</p>
+        <h3>${c.marque || ""} ${c.modele || ""}</h3>
+        <p class="car-price">${nombre(c.prix)} دج</p>
+        <div class="specs">${specs}</div>
       </div>
     `;
-    grid.appendChild(article);
+    grid.appendChild(carte);
   });
 }
 
-// الفلترة
 function filtrer() {
   const marque = document.getElementById("f-marque").value.trim().toLowerCase();
   const type = document.getElementById("f-type").value;
