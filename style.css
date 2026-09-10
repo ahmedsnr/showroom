@@ -111,9 +111,10 @@ main { padding: 70px 20px; }
   border-radius: 10px; padding: 20px; margin-top: 16px;
 }
 
+/* auto-fit بدل auto-fill: البطاقات تتمدد ولا تترك فراغاً */
 .grid {
   display: grid; gap: 22px; margin-top: 30px;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
 }
 
 .car {
@@ -169,20 +170,29 @@ a.car:hover {
 .site-footer p { color: rgba(255,255,255,.65); font-size: 15px; }
 
 /* الهاتف */
-@media (max-width: 640px) {
+@media (max-width: 700px) {
   .site-header { position: static; padding: 14px 18px; }
   .site-header nav { gap: 14px; font-size: 14px; }
   .btn-call { padding: 8px 14px; }
 
-  .hero { padding: 60px 20px 55px; }
-  .hero h1 { font-size: 30px; }
-  .hero p { font-size: 16px; }
-  .search-bar { padding: 14px; }
-  .search-bar button { width: 100%; }
+  .hero { padding: 55px 18px 50px; }
+  .hero h1 { font-size: 27px; }
+  .hero p { font-size: 15px; }
 
-  .stat { padding: 24px 16px; }
-  .stat b { font-size: 28px; }
+  /* الحقول تنزل تحت بعضها بدل الصف الضيّق */
+  .search-bar {
+    display: block; padding: 16px; margin-top: 30px;
+  }
+  .search-bar label { display: block; margin-bottom: 12px; }
+  .search-bar button { width: 100%; padding: 14px; }
 
-  main { padding: 45px 20px; }
-  .section-head h2 { font-size: 24px; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat { padding: 22px 14px; }
+  .stat b { font-size: 26px; }
+  .stat span { font-size: 14px; }
+
+  main { padding: 45px 18px; }
+  .section-head h2 { font-size: 23px; }
+
+  .grid { grid-template-columns: 1fr; gap: 18px; }
 }
