@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>لوحة التحكم — شوروم السيارات</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin">
+
+  <!-- شاشة كلمة السر -->
+  <div id="lock" class="lock">
+    <div class="lock-box">
+      <h1>لوحة التحكم</h1>
+      <p>أدخل كلمة السر للمتابعة</p>
+      <input type="password" id="pass" placeholder="كلمة السر">
+      <button id="btn-login">دخول</button>
+      <p id="lock-error" class="lock-error"></p>
+    </div>
+  </div>
+
+  <!-- اللوحة -->
+  <div id="panel" class="panel hidden">
+    <header class="admin-header">
+      <strong>لوحة التحكم</strong>
+      <a href="index.html" target="_blank">عرض الموقع</a>
+    </header>
+
+    <section class="form-card">
+      <h2 id="form-title">إضافة سيارة</h2>
+
+      <div class="form-grid">
+        <label>الماركة <input type="text" id="marque" placeholder="Hyundai"></label>
+        <label>الموديل <input type="text" id="modele" placeholder="Tucson"></label>
+        <label>السنة <input type="number" id="annee" placeholder="2023"></label>
+        <label>السعر (دج) <input type="number" id="prix" placeholder="4500000"></label>
+
+        <label>النوع
+          <select id="type">
+            <option value="occasion">مستعملة</option>
+            <option value="neuf">جديدة</option>
+            <option value="import">وارد الخارج</option>
+          </select>
+        </label>
+
+        <label>الكيلومتراج <input type="number" id="kilometrage" placeholder="45000"></label>
+
+        <label>الوقود
+          <select id="carburant">
+            <option value="essence">بنزين</option>
+            <option value="diesel">مازوت</option>
+            <option value="gpl">غاز GPL</option>
+            <option value="hybride">هجينة</option>
+          </select>
+        </label>
+
+        <label>ناقل الحركة
+          <select id="boite">
+            <option value="manuelle">عادي</option>
+            <option value="automatique">أوتوماتيك</option>
+          </select>
+        </label>
+
+        <label>اللون <input type="text" id="couleur" placeholder="أبيض"></label>
+
+        <label>الحالة
+          <select id="statut">
+            <option value="disponible">متوفرة</option>
+            <option value="reserve">محجوزة</option>
+            <option value="vendu">مُباعة</option>
+          </select>
+        </label>
+
+        <label class="full">رابط الصورة
+          <input type="url" id="imagePrincipale" placeholder="https://...">
+        </label>
+
+        <label class="full">الوصف
+          <textarea id="description" rows="3" placeholder="حالة السيارة، ما يميّزها، الأوراق…"></textarea>
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button id="btn-save">حفظ السيارة</button>
+        <button id="btn-cancel" class="ghost hidden">إلغاء التعديل</button>
+        <span id="msg" class="msg"></span>
+      </div>
+    </section>
+
+    <section class="list-card">
+      <h2>السيارات المسجّلة</h2>
+      <div id="admin-list"></div>
+    </section>
+  </div>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
