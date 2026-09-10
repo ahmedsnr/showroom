@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>شوروم السيارات</title>
+  <meta name="description" content="سيارات جديدة ومستعملة وواردة من الخارج، بأسعارها وحالتها.">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="index.html" class="logo">شوروم <span>السيارات</span></a>
+    <nav>
+      <a href="index.html">الرئيسية</a>
+      <a href="#voitures">السيارات</a>
+      <a href="tel:+213000000000" class="btn-call">اتصل بنا</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>السيارة التي تبحث عنها، بسعرها وحالتها، دون لف ودوران.</h1>
+    <p>كل سيارة معروضة هنا موجودة فعلاً في الشوروم. اختر، اتصل، وتعال لمعاينتها.</p>
+
+    <div class="search-bar">
+      <label>
+        الماركة
+        <input type="text" id="f-marque" placeholder="مثال: Hyundai">
+      </label>
+      <label>
+        النوع
+        <select id="f-type">
+          <option value="">الكل</option>
+          <option value="neuf">جديدة</option>
+          <option value="occasion">مستعملة</option>
+          <option value="import">وارد الخارج</option>
+        </select>
+      </label>
+      <label>
+        أقصى ميزانية (دج)
+        <input type="number" id="f-budget" placeholder="4000000">
+      </label>
+      <button id="btn-search">اعرض السيارات</button>
+    </div>
+  </section>
+
+  <main id="voitures" class="container">
+    <h2>السيارات المتوفرة</h2>
+    <p id="etat" class="etat">جارٍ التحميل…</p>
+    <div id="cars-grid" class="grid"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>شوروم السيارات</strong>
+      <p>سيارات جديدة ومستعملة وواردة من الخارج.</p>
+    </div>
+    <div>
+      <strong>التواصل</strong>
+      <p>الهاتف: 213000000000+</p>
+      <p>واتساب: 213000000000+</p>
+    </div>
+    <div>
+      <strong>العنوان</strong>
+      <p>العنوان الكامل هنا</p>
+      <p>السبت — الخميس، 9:00 إلى 18:00</p>
+    </div>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
