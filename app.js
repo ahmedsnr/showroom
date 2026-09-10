@@ -42,8 +42,9 @@ function afficher(liste) {
 
   liste.forEach(c => {
     const vendu = c.statut === "vendu";
-    const article = document.createElement("article");
+    const article = document.createElement("a");
     article.className = "car";
+    article.href = `voiture.html?id=${c.id}`;
     article.innerHTML = `
       <div class="car-photo">
         ${c.imagePrincipale ? `<img src="${c.imagePrincipale}" alt="${c.marque} ${c.modele}" loading="lazy">` : ""}
